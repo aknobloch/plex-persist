@@ -1,2 +1,24 @@
-# plex-persist
-Persists the metadata information from a Plex Media Server
+# Plex Persist
+### About
+Plex Persist aims at persisting the music metadata that is auto-discovered by Plex.
+
+### Problem
+Plex is a very powerful, (mostly) open-source media server. One of it's most impressive functions is the ability to automatically and intelligently look up metadata for your music library, and allow the user to add or correct this data as needed. However, this data is self-contained to the Plex server itself. 
+
+Unfortunately, the Plex team has made it clear that they **will not** include this functionality in the server - they stick to a strict code of "don't change the data," for better or for worse. However, there are many people who wish this was not the case. 
+* [Let Plex write the metadata to the file](https://forums.plex.tv/t/let-plex-write-the-metadata-to-the-file/9845)
+* [Is there a way to automatically write metadata to media files?](https://www.reddit.com/r/PleX/comments/69sfje/is_there_a_way_to_automatically_write_metadata_to/)
+* [Can I take Plex metadata and attach it to files?](https://www.reddit.com/r/PleX/comments/2dc4qv/can_i_take_plex_metadata_and_attach_it_to_files/)
+* [Any way to provide metadata outside of the Plex database?](https://www.reddit.com/r/PleX/comments/5ksyfh/any_way_to_provide_metadata_outside_of_the_plex/)
+* [Saving Metadata to local files](https://www.reddit.com/r/PleX/comments/2yar8h/saving_metadata_to_local_files/)
+* [Is there a way to 'save' metadata I've put in myself for Home Videos that can't be fetched from the internet?](https://www.reddit.com/r/PleX/comments/7z3aj6/is_there_a_way_to_save_metadata_ive_put_in_myself/)
+* The list goes on...and on...and on. But you get the point.
+
+### Existing Solutions
+There are a number of solutions that automatically attach metadata to files. But none of these fit the needs I wanted. Most did not integrate with Plex. Some integrated with Plex, but only did metadata for MP4 files in your video library. Some did music, but were limited by only working on certain operating systems.
+
+### Plex Persist Goals
+The goals of Plex Persist are simple.
+1. Save all Plex audio metadata to the source files.
+2. Be intuitive, quick and easy to use.
+3. Be cross-platform.
