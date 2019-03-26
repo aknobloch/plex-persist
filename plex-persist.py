@@ -3,6 +3,11 @@ import urllib
 from plexapi.myplex import MyPlexAccount
 from song import Song
 
+if __name__ not == '__main__' :
+
+        print('Plex Persist not called directly, exiting...')
+        return
+
 parser = argparse.ArgumentParser(
         prog='Plex Persist',
         usage='python3 persist.py MyServer Music aknobloch MY_P455W0RD',
@@ -37,7 +42,6 @@ parser.add_argument(
         type=str,
         help='Password for the owner of the Plex server.')
 
-
 args = parser.parse_args()
 
 username = args.username
@@ -51,7 +55,7 @@ music = plex.library.section(section_name)
 
 for artist in music.searchArtists() :
 
-    for track in artist.tracks() :
+for track in artist.tracks() :
 
         song = Song(track)
         print(song)
