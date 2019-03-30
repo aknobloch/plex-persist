@@ -1,7 +1,7 @@
 import argparse
 import urllib
 import sys
-from log import log
+from logutil import log
 from plexapi.myplex import MyPlexAccount
 from song import Song
 
