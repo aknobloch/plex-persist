@@ -1,9 +1,12 @@
+import magic
+import log
+from constants import FileType
 from plexapi.audio import Track
 
 class Song() :
 
     def __init__(self, track):
-
+        
         self.title = self.__get_tag(track.title)
         self.artist = self.__get_tag(track.grandparentTitle)
         self.album = self.__get_tag(track.parentTitle)
@@ -11,7 +14,11 @@ class Song() :
 
         abs_file_location = track.media[0].parts[0].file
         self.sys_location = self.__get_tag(abs_file_location)
-        self.filetype = self.__get_tag(abs_file_location[abs_file_location.rfind('.') + 1:].upper())
+
+        self.filetype = self.__get_filetype()
+
+        log.debug('Created song reference:')
+        log.debug(self)
 
     def __get_artwork_url(self, track) :
         
@@ -42,6 +49,28 @@ class Song() :
     def is_empty(self, tag) :
 
         return tag is None or tag.strip().startswith('[Unknown')
+
+    def __get_filetype(self) :
+
+        filetype = magic.from_file(self.sys_location, mime=True).upper()
+        filetype = filetype[filetype.rfind('/') + 1:]
+
+        if filetype == FileType.FLAC or filetype == FileType.XFLAC :
+            return FileType.FLAC
+
+        elif filetype == FileType.MP4 :
+            return FileType.MP4
+
+        elif filetype == FileType.MPEG :
+            return FileType.MPEG
+
+        elif filetype == FileType.WAV or filetype == FileType.XWAV :
+            return FileType.WAV
+
+        else :
+            log.error('Could not find a valid filetype for the following path:')
+            log.error(self.sys_location)
+            return None
 
     def __str__(self) :
 
