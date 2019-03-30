@@ -1,6 +1,11 @@
 class FileType() :
 
     WAV = 'WAV'
+    XWAV = 'X-WAV'
+
     FLAC = 'FLAC'
-    MP3 = 'MP3'
-    M4A = 'M4A'
+    XFLAC = 'X-FLAC'
+
+    MPEG = 'MPEG'
+    
+    MP4 = 'MP4'
