@@ -1,35 +1,37 @@
 import sys
 from constants import TextStyle, LogLevel
 
-__LOG_LEVEL = LogLevel.INFO
+class log() :
 
-def __change_color(color) :
+    __LOG_LEVEL = LogLevel.INFO
 
-    sys.stdout.write(color)
+    def __change_color(color) :
 
-def __reset_color() :
+        sys.stdout.write(color)
 
-    sys.stdout.write(TextStyle.RESET)
+    def __reset_color() :
 
-def enable_debug() :
+        sys.stdout.write(TextStyle.RESET)
 
-    __LOG_LEVEL = LogLevel.DEBUG
+    def enable_debug() :
 
-def info(message) :
+        log.__LOG_LEVEL = LogLevel.DEBUG
 
-    print(message)
+    def info(message) :
 
-def debug(message) :
+        print(message)
 
-    if __LOG_LEVEL != LogLevel.DEBUG :
-        return
+    def debug(message) :
 
-    __change_color(TextStyle.BOLD)
-    print(message)
-    __reset_color()
+        if log.__LOG_LEVEL != LogLevel.DEBUG :
+            return
 
-def error(message) :
+        log.__change_color(TextStyle.BOLD)
+        print(message)
+        log.__reset_color()
 
-    __change_color(TextStyle.RED)
-    print(message)
-    __reset_color()
+    def error(message) :
+
+        log.__change_color(TextStyle.RED)
+        print(message)
+        log.__reset_color()

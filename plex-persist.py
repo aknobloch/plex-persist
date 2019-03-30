@@ -1,7 +1,7 @@
 import argparse
 import urllib
 import sys
-import log
+from log import log
 from plexapi.myplex import MyPlexAccount
 from song import Song
 
@@ -45,16 +45,15 @@ parser.add_argument(
         help='Password for the owner of the Plex server.')
 
 parser.add_argument(
-        '-d',
-        '--debug',
+        '--verbose',
+        '-v',
         action='store_true', 
-        help='Enables debug logging.',
+        help='Enables verbose logging.',
         dest='debug')
 
 args = parser.parse_args()
 
 if args.debug :
-
         log.enable_debug()
 
 username = args.username

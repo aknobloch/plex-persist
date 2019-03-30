@@ -1,5 +1,5 @@
 import magic
-import log
+from log import log
 from constants import FileType
 from plexapi.audio import Track
 
