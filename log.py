@@ -1,12 +1,7 @@
 import sys
+from constants import TextStyle, LogLevel
 
-RED   = '\033[1;31m'  
-BLUE  = '\033[1;34m'
-CYAN  = '\033[1;36m'
-GREEN = '\033[0;32m'
-RESET = '\033[0;0m'
-BOLD    = '\033[;1m'
-REVERSE = '\033[;7m'
+__LOG_LEVEL = LogLevel.INFO
 
 def __change_color(color) :
 
@@ -14,7 +9,11 @@ def __change_color(color) :
 
 def __reset_color() :
 
-    sys.stdout.write(RESET)
+    sys.stdout.write(TextStyle.RESET)
+
+def enable_debug() :
+
+    __LOG_LEVEL = LogLevel.DEBUG
 
 def info(message) :
 
@@ -22,12 +21,15 @@ def info(message) :
 
 def debug(message) :
 
-    __change_color(BOLD)
+    if __LOG_LEVEL != LogLevel.DEBUG :
+        return
+
+    __change_color(TextStyle.BOLD)
     print(message)
     __reset_color()
 
 def error(message) :
 
-    __change_color(RED)
+    __change_color(TextStyle.RED)
     print(message)
     __reset_color()

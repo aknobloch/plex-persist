@@ -44,7 +44,18 @@ parser.add_argument(
         type=str,
         help='Password for the owner of the Plex server.')
 
+parser.add_argument(
+        '-d',
+        '--debug',
+        action='store_true', 
+        help='Enables debug logging.',
+        dest='debug')
+
 args = parser.parse_args()
+
+if args.debug :
+
+        log.enable_debug()
 
 username = args.username
 password = args.password
@@ -60,4 +71,3 @@ for artist in music.searchArtists() :
         for track in artist.tracks() :
 
                 song = Song(track)
-                print(song)
