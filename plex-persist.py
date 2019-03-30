@@ -1,12 +1,14 @@
 import argparse
 import urllib
+import sys
+import log
 from plexapi.myplex import MyPlexAccount
 from song import Song
 
-if __name__ not == '__main__' :
+if __name__ != '__main__' :
 
-        print('Plex Persist not called directly, exiting...')
-        return
+        log.error('Plex Persist not called directly, exiting...')
+        sys.exit()
 
 parser = argparse.ArgumentParser(
         prog='Plex Persist',
@@ -55,7 +57,7 @@ music = plex.library.section(section_name)
 
 for artist in music.searchArtists() :
 
-for track in artist.tracks() :
+        for track in artist.tracks() :
 
-        song = Song(track)
-        print(song)
+                song = Song(track)
+                print(song)
