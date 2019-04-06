@@ -17,9 +17,6 @@ class Song() :
 
         self.filetype = self.__get_filetype()
 
-        log.debug('Created song reference:')
-        log.debug(self)
-
     def __get_artwork_url(self, track) :
         
         if not self.is_empty(track.thumb) :
