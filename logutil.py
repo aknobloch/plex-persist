@@ -1,4 +1,5 @@
 import sys
+from logging import exception as log_exception
 from constants import TextStyle, LogLevel
 
 class log() :
@@ -34,4 +35,10 @@ class log() :
 
         log.__change_color(TextStyle.RED)
         print(message)
+        log.__reset_color()
+
+    def exception(message) :
+
+        log.__change_color(TextStyle.RED)
+        log_exception(message)
         log.__reset_color()
