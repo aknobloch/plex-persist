@@ -1,6 +1,6 @@
 import magic
-from logutil import log
-from constants import FileType
+from util.logutil import log
+from model.constants import FileType
 from plexapi.audio import Track
 
 class Song() :

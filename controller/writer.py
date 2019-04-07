@@ -3,10 +3,10 @@ from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4, MP4Cover
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3, APIC, error, PictureType
-from constants import FileType
-from song import Song
-from logutil import log
-from artwork import AlbumArt
+from model.constants import FileType
+from model.song import Song
+from util.logutil import log
+from util.artwork import AlbumArt
 
 def get_writer(song) :
 

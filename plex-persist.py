@@ -1,12 +1,12 @@
 import argparse
 import urllib
 import sys
-from logutil import log
+from util.logutil import log
 from logging import exception as log_exception
 from plexapi.myplex import MyPlexAccount
-from song import Song
-from writer import get_writer
-from constants import FileType
+from model.song import Song
+from controller.writer import get_writer
+from model.constants import FileType
 
 if __name__ != '__main__':
 

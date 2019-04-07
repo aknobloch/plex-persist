@@ -1,6 +1,6 @@
 import sys
 from logging import exception as log_exception
-from constants import TextStyle, LogLevel
+from model.constants import TextStyle, LogLevel
 
 class log() :
 

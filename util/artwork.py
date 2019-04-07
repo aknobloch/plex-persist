@@ -1,5 +1,5 @@
 from urllib.request import urlretrieve
-from logutil import log
+from util.logutil import log
 from PIL import Image
 import os
 
