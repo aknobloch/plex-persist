@@ -1,5 +1,6 @@
 from mutagen.flac import FLAC, Picture
 from mutagen.mp3 import MP3
+from mutagen.mp4 import MP4, MP4Cover
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3, APIC, error, PictureType
 from constants import FileType
@@ -14,6 +15,9 @@ def get_writer(song) :
 
     elif song.filetype == FileType.FLAC :
         return FLACWriter(song)
+
+    elif song.filetype == FileType.MP4 :
+        return MP4Writer(song)
 
     else :
 
@@ -97,5 +101,31 @@ class FLACWriter(AbstractSongWriter) :
 
             tags.add_picture(artwork)
             tags.save()
+
+class MP4Writer(AbstractSongWriter) :
+
+    def write_song_info_to_disk(self) :
+
+        tags = MP4(self.song.sys_location)
+
+        if self.song.title is not None: tags['\xa9nam'] = self.song.title
+        if self.song.artist is not None: tags['\xa9ART'] = self.song.artist
+        if self.song.album is not None: tags['\xa9alb'] = self.song.album
+
+        tags.save()
+
+        self.__add_album_art(tags)
+
+    def __add_album_art(self, tags) :
+
+        with AlbumArt(self.song.title, self.song.artwork_url) as album_art :
+
+            album_cover_data = open(album_art.get_png_image_location(), 'rb').read()
+            
+            artwork = MP4Cover(album_cover_data, imageformat=MP4Cover.FORMAT_PNG)
+            
+            tags['covr'] = [ artwork ]
+            tags.save()
+
 
 
