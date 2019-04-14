@@ -1,6 +1,7 @@
-import argparse
 import urllib
 import sys
+from util.argparser import get_arg_parser
+from util.prompt import do_abort_prompt
 from util.logutil import log
 from logging import exception as log_exception
 from plexapi.myplex import MyPlexAccount
@@ -13,48 +14,30 @@ if __name__ != '__main__':
     log.error('Plex Persist not called directly, exiting...')
     sys.exit()
 
-parser = argparse.ArgumentParser(
-    prog='Plex Persist',
-    usage='python3 persist.py MyServer Music aknobloch MY_P455W0RD',
-    description='Persists the metadata information from a Plex Media Server.'
-)
+def get_total_songs(music_collection) :
 
-parser.add_argument(
-    'server_name',
-    metavar='server',
-    type=str,
-    help='Name of the Plex server. This can be found by logging into \
-                the desired server via the Web UI. The name will be in the upper left.')
+    total = 0
 
-parser.add_argument(
-    'section_name',
-    metavar='section',
-    type=str,
-    help='Name of the audio library section. This is usually \"Music\," \
-                but you may have renamed it during creation. You can find this \
-                by logging into the desired server via the Web UI. The names of \
-                your libraries will be on the left panel.')
+    for artist in music_collection.searchArtists():
+        for track in artist.tracks():
+            total += 1
 
-parser.add_argument(
-    'username',
-    metavar='username',
-    type=str,
-    help='Username for the owner of the Plex server.')
+    return total
 
-parser.add_argument(
-    'password',
-    metavar='password',
-    type=str,
-    help='Password for the owner of the Plex server.')
+def process_song(song) :
 
-parser.add_argument(
-    '--verbose',
-    '-v',
-    action='store_true',
-    help='Enables verbose logging.',
-    dest='debug')
+    writer = get_writer(song)
 
-args = parser.parse_args()
+    if writer is None:
+        return
+    
+    try :
+        writer.write_song_info_to_disk()
+    except Exception :
+        log.exception('Error writing some, or all, of the song info to disk!')
+        do_abort_prompt()
+
+args = get_arg_parser().parse_args()
 
 if args.debug:
     log.enable_debug()
@@ -85,36 +68,3 @@ for artist in music.searchArtists():
         log.debug(song)
 
         process_song(song)
-
-def process_song(song) :
-
-    writer = get_writer(song)
-
-    if writer is None:
-        return
-    
-    try :
-        writer.write_song_info_to_disk()
-    except Exception :
-        log.exception('Error writing some, or all, of the song info to disk!')
-        do_abort_prompt()
-
-def do_abort_prompt() :
-
-    abort = ''
-
-    while abort != 'Y' or abort != 'N' :
-        abort = raw_input('Would you like to abort the process now? (y/n): ')
-    
-    if abort == 'Y' :
-        sys.exit()
-
-def get_total_songs(music_collection) :
-
-    total = 0
-
-    for artist in music_collection.searchArtists():
-        for track in artist.tracks():
-            total += 1
-
-    return total
