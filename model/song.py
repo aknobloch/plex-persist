@@ -65,8 +65,8 @@ class Song() :
             return FileType.WAV
 
         else :
-            log.error('Could not find a valid filetype for the following path:')
-            log.error(self.sys_location)
+            log.error('Could not find a valid filetype for the following path: ' + str(self.sys_location))
+            log.debug('File type metadata read as ' + str(filetype))
             return None
 
     def __str__(self) :
