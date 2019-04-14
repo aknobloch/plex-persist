@@ -68,23 +68,42 @@ account = MyPlexAccount(username, password)
 plex = account.resource(server_name).connect()
 music = plex.library.section(section_name)
 
+total_songs = get_total_songs(music)
+log.info('Found ' + str(total_songs) + ' total songs in collection.')
+
+processed_songs = 0
 
 for artist in music.searchArtists():
     for track in artist.tracks():
 
+        processed_songs += 1
         song = Song(track)
 
         log.debug('-------------------')
-        log.debug('Processing song...')
+        log.info('Processing song ' + str(processed_songs) + '/' + str(total_songs))
         log.debug('-------------------')
         log.debug(song)
 
-        writer = get_writer(song)
+        process_song(song)
 
-        if writer is None:
-            continue
-        
-        try :
-            writer.write_song_info_to_disk()
-        except Exception :
-            log.exception('Error writing some, or all, of the song info to disk!')
+def process_song(song) :
+
+    writer = get_writer(song)
+
+    if writer is None:
+        return
+    
+    try :
+        writer.write_song_info_to_disk()
+    except Exception :
+        log.exception('Error writing some, or all, of the song info to disk!')
+
+def get_total_songs(music_collection) :
+
+    total = 0
+
+    for artist in music_collection.searchArtists():
+        for track in artist.tracks():
+            total += 1
+
+    return total
