@@ -106,7 +106,7 @@ def do_abort_prompt() :
     while abort != 'Y' or abort != 'N' :
         abort = raw_input('Would you like to abort the process now? (y/n): ')
     
-    if abort = 'Y' :
+    if abort == 'Y' :
         sys.exit()
 
 def get_total_songs(music_collection) :
