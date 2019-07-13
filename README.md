@@ -1,5 +1,23 @@
 # Plex Persist
-### About
+
+## How To Use
+Plex Persist is a python program, executed from the `plex-persist.py` file.
+
+### System Requirements
+* Python 3 and Pip installed
+* User access to Plex server
+
+### Dependency Setup
+You will need to install the following packages:
+* [Plex API](https://github.com/pkkid/python-plexapi) `pip3 install plexapi`
+* [Python Magic](https://github.com/ahupp/python-magic) `pip3 install python-magic`
+* [Mutagen](https://github.com/quodlibet/mutagen) `pip3 install mutagen`
+* [Pillow](https://github.com/python-pillow/Pillow) `pip3 install pillow`
+
+### Running
+Run the `plex-persist.py` file with Python 3, adding positional arguments for your server name, section, username and password. Execute the command `python3 plex-persist.py --help` for more information on running. 
+
+## About
 Plex Persist aims at persisting the music metadata that is auto-discovered by Plex.
 
 ### Problem
