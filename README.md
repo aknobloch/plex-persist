@@ -2,7 +2,7 @@
 Plex Persist will take the meta data from your Plex Server (artist name, track title, album, cover art, etc.) and update the files on your hard disk with that same information. 
 
 ## How To Use
-Plex Persist is a python program, executed from the `plex-persist.py` file.
+Plex Persist is a python program, executed from the `plex-persist.py` file. It is strongly recommended to create backup, or LVM snapshot, of your data before executing.
 
 #### System Requirements
 * Python 3 and Pip installed
