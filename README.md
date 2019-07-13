@@ -1,26 +1,30 @@
 # Plex Persist
+Plex Persist will take the meta data from your Plex Server (artist name, track title, album, cover art, etc.) and update the files on your hard disk with that same information. 
 
 ## How To Use
 Plex Persist is a python program, executed from the `plex-persist.py` file.
 
-### System Requirements
+#### System Requirements
 * Python 3 and Pip installed
 * User access to Plex server
 
-### Dependency Setup
+#### Dependency Setup
 You will need to install the following packages:
 * [Plex API](https://github.com/pkkid/python-plexapi) `pip3 install plexapi`
 * [Python Magic](https://github.com/ahupp/python-magic) `pip3 install python-magic`
 * [Mutagen](https://github.com/quodlibet/mutagen) `pip3 install mutagen`
 * [Pillow](https://github.com/python-pillow/Pillow) `pip3 install pillow`
 
-### Running
+#### Running
 Run the `plex-persist.py` file with Python 3, adding positional arguments for your server name, section, username and password. Execute the command `python3 plex-persist.py --help` for more information on running. 
+
+#### Known Issues
+* Plex Persist cannot currently handle `.m4a` files.
 
 ## About
 Plex Persist aims at persisting the music metadata that is auto-discovered by Plex.
 
-### Problem
+#### Problem
 Plex is a very powerful, (mostly) open-source media server. One of it's most impressive functions is the ability to automatically and intelligently look up metadata for your music library, and allow the user to add or correct this data as needed. However, this data is self-contained to the Plex server itself. 
 
 Unfortunately, the Plex team has made it clear that they **will not** include this functionality in the server - they stick to a strict code of "don't change the data," for better or for worse. However, there are many people who wish this was not the case. 
@@ -32,11 +36,6 @@ Unfortunately, the Plex team has made it clear that they **will not** include th
 * [Is there a way to 'save' metadata I've put in myself for Home Videos that can't be fetched from the internet?](https://www.reddit.com/r/PleX/comments/7z3aj6/is_there_a_way_to_save_metadata_ive_put_in_myself/)
 * The list goes on...and on...and on. But you get the point.
 
-### Existing Solutions
+#### Existing Solutions
 There are a number of solutions that automatically attach metadata to files. But none of these fit the needs I wanted. Most did not integrate with Plex. Some integrated with Plex, but only did metadata for MP4 files in your video library. Some did music, but were limited by only working on certain operating systems.
 
-### Plex Persist Goals
-The goals of Plex Persist are simple.
-1. Save all Plex audio metadata to the source files.
-2. Be intuitive, quick and easy to use.
-3. Be cross-platform.
