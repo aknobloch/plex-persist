@@ -2,12 +2,15 @@ from urllib.request import urlretrieve
 from util.logutil import log
 from PIL import Image
 import os
+import re
 
 class AlbumArt() :
 
     def __init__(self, track_title, url) :
 
-        self.temp_name = track_title + '_art_temp.png'
+        # firstly, remove any funky characters from title
+        self.temp_name = re.sub('[^\w\-_\. ]', '_', track_title)
+        self.temp_name = self.temp_name + '_art_temp.png'
         self.resource_url = url
 
     def get_png_image_location(self) :
