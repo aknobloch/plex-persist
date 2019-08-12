@@ -44,6 +44,21 @@ def get_arg_parser() :
         help='Password for the owner of the Plex server.')
 
     parser.add_argument(
+        '-a',
+        '--artist-filter',
+        help='Optional filter for artist name. Only those matching the \
+                    given filter query will be processed. This should be the \
+                    artist name as seen in the Plex library.' ,
+        dest='artist_filter')
+
+    parser.add_argument(
+        '-d',
+        '--dry-run',
+        action='store_true',
+        help='Outputs what information is retrieved without writing to disk.',
+        dest='dry_run')
+
+    parser.add_argument(
         '-v',
         '--verbose',
         action='store_true',
