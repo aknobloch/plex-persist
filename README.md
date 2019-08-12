@@ -1,9 +1,6 @@
 # Plex Persist
 Plex Persist will take the meta data from your Plex Server (artist name, track title, album, cover art, etc.) and update the files on your hard disk with that same information. 
 
-## How To Use
-Plex Persist is a python program, executed from the `plex-persist.py` file. It is strongly recommended to create backup, or LVM snapshot, of your data before executing.
-
 #### System Requirements
 * Python 3 and Pip installed
 * User access to Plex server
@@ -15,8 +12,14 @@ You will need to install the following packages:
 * [Mutagen](https://github.com/quodlibet/mutagen) `pip3 install mutagen`
 * [Pillow](https://github.com/python-pillow/Pillow) `pip3 install pillow`
 
+## How To Use
+Plex Persist is a python program, executed from the `plex-persist.py` file. It is strongly recommended to create backup, or LVM snapshot, of your data before executing.
+
 #### Running
-Run the `plex-persist.py` file with Python 3, adding positional arguments for your server name, section, username and password. Execute the command `python3 plex-persist.py --help` for more information on running. 
+Run the `plex-persist.py` file with Python 3, adding positional arguments for your server name, section, username and password. Execute the command `python3 plex-persist.py --help` for more information on running.
+
+#### Artist Filtering
+The optional `--artist-filter '<name>` flag allows running only against artists who match the given search criteria. Note that this is not a strict match, nor case sensitive. For instance both the artist 'Mac Miller' and 'Macklemore' will match the search criteria 'mac'. Additonally, the search results are based on Plex's search algorithm and the results of identical queries are subject to change at any point. **It is strongly recommended you use the `--dry-run` flag when attempting to filter to make sure no additional results are pulled in.**
 
 #### Known Issues
 * Plex Persist cannot currently handle `.m4a` files.
