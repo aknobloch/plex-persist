@@ -1,5 +1,5 @@
 # Plex Persist
-Plex Persist will take the meta data from your Plex Server (artist name, track title, album, cover art, etc.) and update the files on your hard disk with that same information. 
+Plex Persist will take the music meta data from your Plex Server (artist name, track title, album, cover art, etc.) and update the files on your hard disk with that same information. 
 
 #### System Requirements
 * Python 3 and Pip installed
@@ -19,7 +19,7 @@ Plex Persist is a python program, executed from the `plex-persist.py` file. It i
 Run the `plex-persist.py` file with Python 3, adding positional arguments for your server name, section, username and password. Execute the command `python3 plex-persist.py --help` for more information on running.
 
 #### Artist Filtering
-The optional `--artist-filter '<name>` flag allows running only against artists who match the given search criteria. Note that this is not a strict match, nor case sensitive. For instance both the artist 'Mac Miller' and 'Macklemore' will match the search criteria 'mac'. Additonally, the search results are based on Plex's search algorithm and the results of identical queries are subject to change at any point. **It is strongly recommended you use the `--dry-run` flag when attempting to filter to make sure no additional results are pulled in.**
+The optional `--artist-filter '<name>'` flag allows running only against artists who match the given search criteria. Note that this is not a strict match, nor case sensitive. For instance both the artist 'Mac Miller' and 'Macklemore' will match the flag `--artist-filter 'mac'`.  Additonally, the search results are based on Plex's search algorithm and the results of identical queries are subject to change at any point. **It is strongly recommended you use the `--dry-run` flag when attempting to filter to make sure no additional results are pulled in.**
 
 #### Known Issues
 * Plex Persist cannot currently handle `.m4a` files.
