@@ -1,7 +1,9 @@
 import magic
 from util.logutil import log
-from model.constants import FileType
+from model.constants import FileType, FileIO
 from plexapi.audio import Track
+import hashlib
+from urllib.parse import urlparse
 
 class Song() :
 
@@ -16,6 +18,27 @@ class Song() :
         self.sys_location = self.__get_tag(abs_file_location)
 
         self.filetype = self.__get_filetype()
+
+    def get_hash(self):
+
+        # Ignore irrelevant parts of the URL such as server name and
+        # plex token query param, only retrieving the resource path
+        parsed_artwork_url = urlparse(self.artwork_url)
+        artwork_server_path = parsed_artwork_url.path
+
+        # Compute hash based on metadata of the song.
+        concat_metadata = self.title + \
+            self.artist + \
+            self.album + \
+            artwork_server_path + \
+            self.sys_location + \
+            self.filetype
+
+        metadata_bytes = bytearray(concat_metadata, FileIO.ENCODING)
+
+        hasher = hashlib.sha256()
+        hasher.update(metadata_bytes)
+        return hasher.hexdigest()
 
     def __get_artwork_url(self, track) :
         

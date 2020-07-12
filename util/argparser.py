@@ -52,6 +52,21 @@ def get_arg_parser() :
         dest='artist_filter')
 
     parser.add_argument(
+        '--redis-server',
+        help='Optional configuration specifying the host and port for a Redis \
+                instance, to be used to track metadata changes. This should be \
+                in the format of host:port, such as "192.168.0.1:4182". \
+                Defaults to "localhost:6379".',
+        dest='redis_server')
+
+    parser.add_argument(
+        '--redis-socket',
+        help='Optional configuration specifying the socket for a Redis \
+                instance, to be used to track metadata changes. This should be \
+                in the format of a file location, such as "/tmp/redis.sock".',
+        dest='redis_socket')
+
+    parser.add_argument(
         '-d',
         '--dry-run',
         action='store_true',
@@ -64,5 +79,11 @@ def get_arg_parser() :
         action='store_true',
         help='Enables verbose logging.',
         dest='debug')
+
+    parser.add_argument(
+        '--force-continue',
+        action='store_true',
+        help='Forces continue, even if errors occur.',
+        dest='force_continue')
 
     return parser
