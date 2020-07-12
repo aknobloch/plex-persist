@@ -1,6 +1,7 @@
 import redis
 from model.song import Song
 from util.logutil import log
+from model.constants import App
 
 class ServerInterface:
     def get_song_hash(self, song):
@@ -25,7 +26,12 @@ class RedisServer(ServerInterface):
             self.server = redis.Redis()
 
     def get_song_hash(self, song):
-        return self.server.get(song.sys_location)
+        song_key = self.__get_song_key(song)
+        return self.server.get(song_key)
 
     def set_song_hash(self, song, hash_value):
-        return self.server.set(song.sys_location, hash_value)
+        song_key = self.__get_song_key(song)
+        return self.server.set(song_key, hash_value)
+
+    def __get_song_key(self, song):
+        return App.NAME + song.sys_location

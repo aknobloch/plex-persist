@@ -28,3 +28,7 @@ class LogLevel() :
 class FileIO() :
 
     ENCODING = "UTF-8"
+
+class App() :
+
+    NAME = "Plex Persist"
