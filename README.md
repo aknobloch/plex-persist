@@ -11,6 +11,7 @@ You will need to install the following packages:
 * [Python Magic](https://github.com/ahupp/python-magic) `pip3 install python-magic`
 * [Mutagen](https://github.com/quodlibet/mutagen) `pip3 install mutagen`
 * [Pillow](https://github.com/python-pillow/Pillow) `pip3 install pillow`
+* [Redis](https://pypi.org/project/redis/) `pip3 install redis`
 
 ## How To Use
 Plex Persist is a python program, executed from the `plex-persist.py` file. It is strongly recommended to create backup, or LVM snapshot, of your data before executing.
@@ -20,6 +21,11 @@ Run the `plex-persist.py` file with Python 3, adding positional arguments for yo
 
 #### Artist Filtering
 The optional `--artist-filter '<name>'` flag allows running only against artists who match the given search criteria. Note that this is not a strict match, nor case sensitive. For instance both the artist 'Mac Miller' and 'Macklemore' will match the flag `--artist-filter 'mac'`.  Additonally, the search results are based on Plex's search algorithm and the results of identical queries are subject to change at any point. **It is strongly recommended you use the `--dry-run` flag when attempting to filter to make sure no additional results are pulled in.**
+
+#### Caching Files
+You can optionally configure a Redis server for Plex Persist to track the files it has seen. By default, Plex Persist will attempt to connect to Redis on `localhost:6379`. You can change this by specifying the `--redis-server` flag. You can also configure it via Unix socket with `--redis-socket`.
+
+This enables much faster (and safer) runs, as Plex Persist will only update the information for songs that have had their metadata changed on the Plex server. Without this enabled, Plex Persist will assume all files need to be updated, even if it is actually re-writing the same metadata. 
 
 #### Known Issues
 * Plex Persist cannot currently handle `.m4a` files.

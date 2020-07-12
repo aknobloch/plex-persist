@@ -24,3 +24,8 @@ class LogLevel() :
 
     INFO = 'INFO'
     DEBUG = 'DEBUG'
+
+class FileIO() :
+
+    READ_BLOCKSIZE = 15 * 1024 * 1024
+    ENCODING = "UTF-8"
